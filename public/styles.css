@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.main {
+  overflow: hidden;
+  background-color: #7494c0;
+  width: 100vw;
+  position: relative;
+}
+.main .content {
+  margin-right: auto;
+  margin-left: auto;
+  height: 100vh;
+}
+.main .content h1 {
+  text-align: center;
+  margin-top: 0;
+  background: #273246;
+  color: #fff;
+}
+.main .content #timeline .others, .main .content #timeline .mine {
+  margin: 30px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.main .content #timeline .others .says, .main .content #timeline .mine .says {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 17px 13px 15px 18px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 0 !important;
+  line-height: 1.5;
+}
+.main .content #timeline .others .says p, .main .content #timeline .mine .says p {
+  margin: 8px 0 0 !important;
+}
+.main .content #timeline .others .says p:first-child, .main .content #timeline .mine .says p:first-child {
+  margin-top: 0 !important;
+}
+.main .content #timeline .others .says:after, .main .content #timeline .mine .says:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+}
+.main .content #timeline .mine {
+  justify-content: flex-end;
+}
+.main .content #timeline .others {
+  margin-left: 30px;
+}
+.main .content #timeline .others .says {
+  background: #fff;
+}
+.main .content #timeline .others .says:after {
+  left: -26px;
+  border-right: 22px solid #fff;
+}
+.main .content #timeline .mine {
+  margin-right: 30px;
+}
+.main .content #timeline .mine .says {
+  background: #8de055;
+}
+.main .content #timeline .mine .says:after {
+  right: -26px;
+  border-left: 22px solid #8de055;
+}
+.main .content .inputArea {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  display: flex;
+}
+.main .content .inputArea input {
+  width: 80%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #555;
+  box-sizing: border-box;
+}
+.main .content .inputArea .sendButton {
+  padding: 10px 15px;
+  border: solid 1px #8de055;
+  color: #fff;
+  background: #8de055;
+}
+
+/*# sourceMappingURL=styles.css.map */

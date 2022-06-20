@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>shiritoriApp</title>
+
+</head>
+<body>
+    <div class="main">
+        <div class="content">
+            <h1>しりとり</h1>
+            <p id="previousWord"></p>
+            <div id="timeline">
+
+            </div>
+            <div class="inputArea">
+                <input id="nextWordInput" type="text">
+                <div class="sendButton">
+                    <a id="nextWordSendButton">送信</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        const timeline = document.querySelector("#timeline");
+        window.onload = async (event) => {
+            const response = await fetch("/shiritori");
+            const previousWord = await response.text();
+            const div = document.createElement('div');
+            div.classList.add('others');
+            const p = document.createElement('p');
+            p.classList.add('says');
+            p.innerText = previousWord;
+            div.appendChild(p);
+            timeline.appendChild(div);
+        };
+
+        document.querySelector("#nextWordSendButton").onclick = async (event) => {
+            const nextWord = document.querySelector("#nextWordInput").value;
+            if (nextWord !== "") {
+                document.querySelector("#nextWordInput").value = "";
+                const response = await fetch("/shiritori", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({nextWord})
+                });
+                if (response.status/100 !== 2) {
+                    const alertText = await response.text();
+                    const div = document.createElement('div');
+                    div.classList.add('others');
+                    const p = document.createElement('p');
+                    p.classList.add('says');
+                    p.innerText = alertText;
+                    div.appendChild(p);
+                    timeline.appendChild(div);
+                    return ;
+                }
+                const previousWord = await response.text();
+                const divr = document.createElement('div');
+                divr.classList.add('mine');
+                const pr = document.createElement('p');
+                pr.classList.add('says');
+                pr.innerText = previousWord;
+                divr.appendChild(pr);
+                timeline.appendChild(divr);
+
+                const divl = document.createElement('div');
+                divl.classList.add('others');
+                const pl = document.createElement('p');
+                pl.innerText = `"${previousWord}"に続く単語を入力してください`;
+                pl.classList.add('says');
+                divl.appendChild(pl);
+                timeline.appendChild(divl)
+            }
+        }
+
+        const input = document.querySelector("#nextWordInput");
+        input.addEventListener("keyup", function () {
+            if (this.value.match(/^[ぁ-ん]+$/)) {
+                this.blur();
+                this.focus();
+            }
+        })
+
+    </script>
+</body>
+</html>
